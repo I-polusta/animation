@@ -1,0 +1,62 @@
+html {
+  box-sizing: border-box;
+  font-size: 10px;
+  background: #232a49;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+h1 {
+  text-align: center;
+  font-size: 5rem;
+  line-height: 1;
+  margin-bottom: 0;
+}
+
+.points {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 0 3rem;
+  line-height: 1;
+  border-radius: 1rem;
+}
+
+.container {
+  width: 600px;
+  height: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.pit {
+  flex: 1 0 33.33%;
+  overflow: hidden;
+  position: relative;
+}
+
+.pit:after {
+  display: block;
+  background: url(/assets/dirt.svg);
+  background-size: contain;
+  content: "";
+  width: 100%;
+  height: 70px;
+  position: absolute;
+  z-index: 2;
+  bottom: -30px;
+}
+.cheem {
+  background: url(/assets/pngaaa.com-4467264.png) bottom center no-repeat;
+  background-size: 60%;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  height: 100%;
+  transition: all 0.4s;
+}
+.pit.up .cheem {
+  top: 0;
+}

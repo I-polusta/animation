@@ -16,68 +16,86 @@
     <!-- <script src="/JS/game.js"></script> -->
   </head>
   <body>
-    <h1>Whack-a-cheems <span class="points">19</span></h1>
+    <h1>Whack-a-cheems <span class="points">0</span></h1>
     <button onclick="start()">Starmt</button>
 
     <div class="container">
-      <div class="hole hole1">
+      <div class="pit pit1">
         <div class="cheem"></div>
       </div>
-      <div class="hole hole2">
+      <div class="pit pit2">
         <div class="cheem"></div>
       </div>
-      <div class="hole hole3">
+      <div class="pit pit3">
         <div class="cheem"></div>
       </div>
-      <div class="hole hole4">
+      <div class="pit pit4">
         <div class="cheem"></div>
       </div>
-      <div class="hole hole5">
+      <div class="pit pit5">
         <div class="cheem"></div>
       </div>
-      <div class="hole hole6">
+      <div class="pit pit6">
         <div class="cheem"></div>
       </div>
-      <div class="hole hole7">
+      <div class="pit pit7">
         <div class="cheem"></div>
       </div>
-      <div class="hole hole8">
+      <div class="pit pit8">
         <div class="cheem"></div>
       </div>
-      <div class="hole hole9">
+      <div class="pit pit9">
         <div class="cheem"></div>
       </div>
     </div>
     <!-- <script src="/JS/game.js"></script> -->
     <script>
-      const holes = document.querySelectorAll(".hole");
+      const pits = document.querySelectorAll(".pit");
       const pointstable = document.querySelectorAll(".points");
       const cheems = document.querySelectorAll(".cheem");
-      let final;
-      let times = false;
+      let flag;
+      let time_end = false;
       let score = 0;
 
       function rand__Time(lower, upper) {
         return Math.round(Math.random() * (upper - lower) + lower);
       }
 
-      function rand__Hole(holes) {
-        const count = Math.floor(Math.random() * holes.length);
-        const select_hole = holes[count];
-        if (select_hole === final) {
+      function rand__pits(pits) {
+        const count = Math.floor(Math.random() * pits.length);
+        const select_pit = pits[count];
+        if (select_pit === flag) {
           console.log("same as last");
-          return rand__Hole(holes);
+          return rand__pits(pits);
         }
 
-        final = select_hole;
-        return select_hole;
+        flag = select_pit;
+        return select_pit;
       }
 
-      function up() {
+      function move_up() {
         const time = rand__Time(200, 1000);
-        const pit = rand__Hole(holes);
-        console.log(time, pit);
+        const select_pit = rand__pits(pits);
+        select_pit.classList.add("up");
+        setTimeout(() => {
+          select_pit.classList.remove("up");
+
+          if (!time_end) move_up();
+        }, time);
       }
+      function start() {
+        pointstable.textContent = 0;
+        time_end = false;
+        score = 0;
+        move_up();
+        setTimeout(() => (time_end = true), 10000);
+      }
+      function hit() {
+        score++;
+        this.classList.remove("up");
+        pointstable.textContent = score;
+      }
+      cheems.forEach((cheem) => cheem.addEventListener("click", hit));
     </script>
   </body>
 </html>
