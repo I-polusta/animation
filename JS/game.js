@@ -5,6 +5,10 @@ let final;
 let times = false;
 let score = 0;
 
-function randTime(min, max) {
-  return Math.round(Math.random() * (max - min) + min);
+function randTime(lower, upper) {
+  return Math.round(Math.random() * (upper - lower) + lower);
+}
+
+function randHole(holes) {
+  console.log(holes.length);
 }

@@ -10,11 +10,13 @@
       rel="stylesheet"
       type="text/css"
     />
-    <link rel="stylesheet" href="../animation/CSS/style.css" />
-    <script src="../animation/JS/game.js"></script>
+    <!-- <link rel="stylesheet" href="../animation/CSS/style.css" />
+    <script src="../animation/JS/game.js"></script> -->
+    <link rel="stylesheet" href="/CSS/style.css" />
+    <!-- <script src="/JS/game.js"></script> -->
   </head>
   <body>
-    <h1>Whack-a-cheems <span class="points">0</span></h1>
+    <h1>Whack-a-cheems <span class="points">19</span></h1>
     <button onclick="start()">Starmt</button>
 
     <div class="container">
@@ -46,5 +48,36 @@
         <div class="cheem"></div>
       </div>
     </div>
+    <!-- <script src="/JS/game.js"></script> -->
+    <script>
+      const holes = document.querySelectorAll(".hole");
+      const pointstable = document.querySelectorAll(".points");
+      const cheems = document.querySelectorAll(".cheem");
+      let final;
+      let times = false;
+      let score = 0;
+
+      function rand__Time(lower, upper) {
+        return Math.round(Math.random() * (upper - lower) + lower);
+      }
+
+      function rand__Hole(holes) {
+        const count = Math.floor(Math.random() * holes.length);
+        const select_hole = holes[count];
+        if (select_hole === final) {
+          console.log("same as last");
+          return rand__Hole(holes);
+        }
+
+        final = select_hole;
+        return select_hole;
+      }
+
+      function up() {
+        const time = rand__Time(200, 1000);
+        const pit = rand__Hole(holes);
+        console.log(time, pit);
+      }
+    </script>
   </body>
 </html>
