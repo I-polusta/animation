@@ -1,25 +1,49 @@
 html {
   box-sizing: border-box;
   font-size: 10px;
-  background: #232a49;
+  background: #ffc600;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
 body {
   padding: 0;
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Amatic SC", cursive;
 }
+
 h1 {
   text-align: center;
-  font-size: 5rem;
+  font-size: 10rem;
   line-height: 1;
   margin-bottom: 0;
 }
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-.points {
-  background: rgba(255, 255, 255, 0.3);
-  padding: 0 3rem;
+.point {
+  color: black;
+
+  width: 150px;
+  font-size: 12rem;
+  padding: 40px;
   line-height: 1;
+  height: 150px;
+  margin-top: 20px;
+  border-radius: 1rem;
+}
+button {
+  display: block;
+  margin: auto;
+  align-items: center;
+  padding: 20px;
   border-radius: 1rem;
 }
 
@@ -39,7 +63,7 @@ h1 {
 
 .pit:after {
   display: block;
-  background: url(/assets/dirt.svg);
+  background: url(/assets/dirt.svg) bottom center no-repeat;
   background-size: contain;
   content: "";
   width: 100%;
@@ -48,6 +72,7 @@ h1 {
   z-index: 2;
   bottom: -30px;
 }
+
 .cheem {
   background: url(/assets/pngaaa.com-4467264.png) bottom center no-repeat;
   background-size: 60%;
@@ -57,6 +82,19 @@ h1 {
   height: 100%;
   transition: all 0.4s;
 }
+
 .pit.up .cheem {
   top: 0;
+}
+
+span {
+  opacity: 0;
+  transition: all 0.8s ease;
+  transform: translateY(50px);
+  display: inline-block;
+}
+
+span.fade {
+  opacity: 1;
+  transform: translateY(0px);
 }

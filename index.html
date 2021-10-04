@@ -2,22 +2,20 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Whack a Cheems!!</title>
+    <title>Whack A Cheems!</title>
     <link
       href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700"
       rel="stylesheet"
       type="text/css"
     />
-    <!-- <link rel="stylesheet" href="../animation/CSS/style.css" />
-    <script src="../animation/JS/game.js"></script> -->
     <link rel="stylesheet" href="/CSS/style.css" />
-    <!-- <script src="/JS/game.js"></script> -->
   </head>
   <body>
-    <h1>Whack-a-cheems <span class="points">0</span></h1>
-    <button onclick="start()">Starmt</button>
+    <div class="header">
+      <h1 class="fancy">Whack-a-Cheems!</h1>
+      <h3 class="point">10</h3>
+    </div>
+    <button onClick="Game()">Start!</button>
 
     <div class="container">
       <div class="pit pit1">
@@ -38,63 +36,81 @@
       <div class="pit pit6">
         <div class="cheem"></div>
       </div>
-      <div class="pit pit7">
-        <div class="cheem"></div>
-      </div>
-      <div class="pit pit8">
-        <div class="cheem"></div>
-      </div>
-      <div class="pit pit9">
-        <div class="cheem"></div>
-      </div>
     </div>
-    <!-- <script src="/JS/game.js"></script> -->
-    <script>
-      const pits = document.querySelectorAll(".pit");
-      const pointstable = document.querySelectorAll(".points");
-      const cheems = document.querySelectorAll(".cheem");
-      let flag;
-      let time_end = false;
-      let score = 0;
 
-      function rand__Time(lower, upper) {
-        return Math.round(Math.random() * (upper - lower) + lower);
+    <script>
+      const text = document.querySelector(".fancy");
+      const strText = text.textContent;
+      console.log(strText);
+      const splitText = strText.split("");
+      text.textContent = "";
+
+      for (let i = 0; i < splitText.length; i++) {
+        text.innerHTML += "<span>" + splitText[i] + "</span>";
+      }
+
+      let char = 0;
+      let timer = setInterval(onTick, 50);
+      function onTick() {
+        const span = text.querySelectorAll("span")[char];
+        span.classList.add("fade");
+        char++;
+        if (char === splitText.length) {
+          complete();
+          return;
+        }
+      }
+      function complete() {
+        clearInterval(timer);
+        timer = null;
+      }
+
+      const pits = document.querySelectorAll(".pit");
+      const pointstable = document.querySelector(".point");
+      const cheems = document.querySelectorAll(".cheem");
+      let endpit;
+      let timeUp = false;
+      let count = 0;
+
+      function rand__Time(min, max) {
+        return Math.round(Math.random() * (max - min) + min);
       }
 
       function rand__pits(pits) {
-        const count = Math.floor(Math.random() * pits.length);
-        const select_pit = pits[count];
-        if (select_pit === flag) {
-          console.log("same as last");
+        const take = Math.floor(Math.random() * pits.length);
+        const pit = pits[take];
+        if (pit === endpit) {
+          console.log("thats the same one");
           return rand__pits(pits);
         }
-
-        flag = select_pit;
-        return select_pit;
+        endtpit = pit;
+        return pit;
       }
 
-      function move_up() {
+      function bounce() {
         const time = rand__Time(200, 1000);
-        const select_pit = rand__pits(pits);
-        select_pit.classList.add("up");
+        const pit = rand__pits(pits);
+        pit.classList.add("up");
         setTimeout(() => {
-          select_pit.classList.remove("up");
-
-          if (!time_end) move_up();
+          pit.classList.remove("up");
+          if (!timeUp) bounce();
         }, time);
       }
-      function start() {
+
+      function Game() {
         pointstable.textContent = 0;
-        time_end = false;
-        score = 0;
-        move_up();
-        setTimeout(() => (time_end = true), 10000);
+        timeUp = false;
+        count = 0;
+        bounce();
+        setTimeout(() => (timeUp = true), 100000000000);
       }
+
       function hit() {
-        score++;
+        count++;
         this.classList.remove("up");
-        pointstable.textContent = score;
+        pointstable.textContent = count;
       }
+
       cheems.forEach((cheem) => cheem.addEventListener("click", hit));
     </script>
   </body>
