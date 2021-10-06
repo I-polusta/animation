@@ -63,7 +63,7 @@ button {
 
 .pit:after {
   display: block;
-  background: url(/assets/dirt.svg) bottom center no-repeat;
+  background: url(../../animation/assets/dirt.svg) bottom center no-repeat;
   background-size: contain;
   content: "";
   width: 100%;
@@ -74,7 +74,8 @@ button {
 }
 
 .cheem {
-  background: url(/assets/pngaaa.com-4467264.png) bottom center no-repeat;
+  background: url(../../animation/assets/pngaaa.com-4467264.png) bottom center
+    no-repeat;
   background-size: 60%;
   position: absolute;
   top: 100%;
