@@ -47,7 +47,7 @@ function rand__pits(pits) {
 }
 
 function bounce() {
-  const time = rand__Time(200, 1000);
+  const time = rand__Time(20, 800);
   const pit = rand__pits(pits);
   pit.classList.add("up");
   setTimeout(() => {
